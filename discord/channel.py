@@ -96,7 +96,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
         :attr:`~Permissions.manage_messages` bypass slowmode.
     """
 
-    __slots__ = ('name', 'id', 'guild', 'topic', '_state', 'nsfw',
+    __slots__ = ('__dict__', 'name', 'id', 'guild', 'topic', '_state', 'nsfw',
                  'category_id', 'position', 'slowmode_delay', '_overwrites',
                  '_type', 'last_message_id')
 
