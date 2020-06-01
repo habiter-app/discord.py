@@ -26,13 +26,13 @@ DEALINGS IN THE SOFTWARE.
 
 from . import utils
 from .mixins import Hashable
-from .abc import Messageable
+import discord.abc
 from enum import Enum
 
 class BareObjectTypes(Enum):
     USER = 'User'
 
-class Object(Hashable, Messageable):
+class Object(Hashable, discord.abc.Messageable):
     """Represents a generic Discord object.
 
     **habiter-app fork**: we need object to be a messageable, 
