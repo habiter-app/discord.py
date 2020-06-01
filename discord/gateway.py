@@ -352,6 +352,7 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
         log.info('Shard ID %s has sent the RESUME payload.', self.shard_id)
 
     async def received_message(self, msg):
+        logging
         self._dispatch('socket_raw_receive', msg)
 
         if type(msg) is bytes:

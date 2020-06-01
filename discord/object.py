@@ -30,6 +30,11 @@ from .mixins import Hashable
 class Object(Hashable):
     """Represents a generic Discord object.
 
+    **HABITER**: we need object to be a messable, specifically in the case of
+    users where we want to inverse map Habiter User -> discord.py users, and 
+    be able to use the `user.send` method. Thus this class extends `abc.Messageable`
+    and implements a `_get_channel`.
+
     The purpose of this class is to allow you to create 'miniature'
     versions of data classes if you want to pass in just an ID. Most functions
     that take in a specific data class with an ID can also take in this class
