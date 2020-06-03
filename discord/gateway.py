@@ -352,7 +352,6 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
         log.info('Shard ID %s has sent the RESUME payload.', self.shard_id)
 
     async def received_message(self, msg):
-        logging
         self._dispatch('socket_raw_receive', msg)
 
         if type(msg) is bytes:
@@ -485,9 +484,7 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
             The websocket connection was terminated for unhandled reasons.
         """
         try:
-            log.warning("[HABITER] polling")
             msg = await self.recv()
-            log.warning(msg)
             await self.received_message(msg)
         except websockets.exceptions.ConnectionClosed as exc:
             if self._can_handle_close(exc.code):
@@ -711,9 +708,6 @@ class DiscordVoiceWebSocket(websockets.client.WebSocketClientProtocol):
         await self.send_as_json(payload)
 
     async def received_message(self, msg):
-        log.warning("[HABITER] received_message")
-        log.warning(msg)
-
         log.debug('Voice websocket frame received: %s', msg)
         op = msg['op']
         data = msg.get('d')
@@ -786,9 +780,7 @@ class DiscordVoiceWebSocket(websockets.client.WebSocketClientProtocol):
 
     async def poll_event(self):
         try:
-            log.warning("[HABITER] polling")
             msg = await asyncio.wait_for(self.recv(), timeout=30.0)
-            log.warning(msg)
             await self.received_message(json.loads(msg))
         except websockets.exceptions.ConnectionClosed as exc:
             raise ConnectionClosed(exc, shard_id=None) from exc
